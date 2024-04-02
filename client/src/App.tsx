@@ -92,19 +92,19 @@ const WalletToolBox = () => {
   const [programId, setProgramId] = useState<string>("");
   const [hyperlink, setHyperlink] = useState<string | null>(null);
 
-  const handleGenerateHyperlink = () => {
-    if (programId && programId.endsWith(".aleo")) {
-      const explorerLink = `https://explorer.hamp.app/program?id=${programId}`;
-      toast.success("Hyperlink has been generated.");
-      setHyperlink(explorerLink);
-    } else {
-      // Display an error toast message
-      toast.error(
-        "Invalid program ID. Please enter a valid program ID ending with '.aleo'."
-      );
-      setHyperlink(null);
-    }
-  };
+  // const handleGenerateHyperlink = () => {
+  //   if (programId && programId.endsWith(".aleo")) {
+  //     const explorerLink = `https://explorer.hamp.app/program?id=${programId}`;
+  //     toast.success("Hyperlink has been generated.");
+  //     setHyperlink(explorerLink);
+  //   } else {
+  //     // Display an error toast message
+  //     toast.error(
+  //       "Invalid program ID. Please enter a valid program ID ending with '.aleo'."
+  //     );
+  //     setHyperlink(null);
+  //   }
+  // };
 
   return (
     <div className="mt-2 flex-column rounded border-2 p-4 bg-light shadow">
