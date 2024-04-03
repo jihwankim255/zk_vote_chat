@@ -1,19 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import "./App.css";
-import { WalletProvider } from "@demox-labs/aleo-wallet-adapter-react";
-import {
-  WalletModalProvider,
-  WalletMultiButton,
-} from "@demox-labs/aleo-wallet-adapter-reactui";
-import { LeoWalletAdapter } from "@demox-labs/aleo-wallet-adapter-leo";
-import {
-  DecryptPermission,
-  WalletAdapterNetwork,
-} from "@demox-labs/aleo-wallet-adapter-base";
-import { ToastContainer } from "react-toastify";
+
+
+
+
 import "react-toastify/dist/ReactToastify.css";
 import "@demox-labs/aleo-wallet-adapter-reactui/styles.css";
+import Wallet from "./components/Wallet";
 const socket = io("http://localhost:5050");
 
 const App: React.FC = () => {
@@ -40,31 +34,14 @@ const App: React.FC = () => {
     }
   };
 
-  const wallets = useMemo(
-    () => [
-      new LeoWalletAdapter({
-        appName: "Leo Demo App",
-      }),
-    ],
-    []
-  );
+
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="flex-column rounded border-2 p-4 bg-light shadow">
         <h1 className="text-center text-slate-300">Hello ZK Chat Vote!</h1>
-
-        <WalletProvider
-          wallets={wallets}
-          decryptPermission={DecryptPermission.UponRequest}
-          network={WalletAdapterNetwork.Testnet}
-          autoConnect={true}
-        >
-          <WalletModalProvider>
-            <WalletMultiButton />
-            <WalletToolBox />
-          </WalletModalProvider>
-        </WalletProvider>
+        <Wallet />
+        
 
         {/* Chat interface */}
         <ul id="messages">
@@ -86,28 +63,6 @@ const App: React.FC = () => {
   );
 };
 
-const WalletToolBox = () => {
-  const [hyperlink, setHyperlink] = useState<string | null>(null);
 
-  return (
-    <div className="mt-2 flex-column rounded border-2 p-4 bg-light shadow">
-      {hyperlink && (
-        <div className="mt-2">
-          <p>Generated Hyperlink:</p>
-          <a href={hyperlink} target="_blank" rel="noopener noreferrer">
-            🔗
-          </a>
-          &nbsp; Link
-        </div>
-      )}
-
-      <ToastContainer
-        position="top-right"
-        // autoClose={3000}
-        hideProgressBar={false}
-      />
-    </div>
-  );
-};
 
 export default App;
