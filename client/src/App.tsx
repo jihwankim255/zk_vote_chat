@@ -11,12 +11,9 @@ import {
   DecryptPermission,
   WalletAdapterNetwork,
 } from "@demox-labs/aleo-wallet-adapter-base";
-// import { Button, Form } from "react-bootstrap";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@demox-labs/aleo-wallet-adapter-reactui/styles.css";
-
-// const socket = io.connect("http://localhost:3000"); // Change to your server address if necessary
 const socket = io("http://localhost:3000");
 
 const App: React.FC = () => {
@@ -30,7 +27,8 @@ const App: React.FC = () => {
 
     // Disconnect the socket when the component unmounts
     return () => {
-      socket.disconnect();
+      //  socket.disconnect();
+      socket.off("chat message");
     };
   }, []);
 
@@ -89,22 +87,7 @@ const App: React.FC = () => {
 };
 
 const WalletToolBox = () => {
-  const [programId, setProgramId] = useState<string>("");
   const [hyperlink, setHyperlink] = useState<string | null>(null);
-
-  // const handleGenerateHyperlink = () => {
-  //   if (programId && programId.endsWith(".aleo")) {
-  //     const explorerLink = `https://explorer.hamp.app/program?id=${programId}`;
-  //     toast.success("Hyperlink has been generated.");
-  //     setHyperlink(explorerLink);
-  //   } else {
-  //     // Display an error toast message
-  //     toast.error(
-  //       "Invalid program ID. Please enter a valid program ID ending with '.aleo'."
-  //     );
-  //     setHyperlink(null);
-  //   }
-  // };
 
   return (
     <div className="mt-2 flex-column rounded border-2 p-4 bg-light shadow">
@@ -120,7 +103,7 @@ const WalletToolBox = () => {
 
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        // autoClose={3000}
         hideProgressBar={false}
       />
     </div>
