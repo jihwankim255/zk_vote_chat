@@ -28,7 +28,7 @@ const Wallet: React.FC =() => {
   >
     <WalletModalProvider>
       <WalletMultiButton />
-      <WalletToolBox />
+      {/* <WalletToolBox /> */}
     </WalletModalProvider>
   </WalletProvider>
 }
